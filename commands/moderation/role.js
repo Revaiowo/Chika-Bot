@@ -66,26 +66,12 @@ export default {
                 .setTimestamp()
                 .setFooter({ text: `${interaction.user.username}`, iconURL: senderAvatar });
 
-            try {
-                await member.roles.remove(role);  
-            } catch (error) {
-                if (error.name === 'Missing Permissions' || error.code === 50013)
-                    return await interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription("I don't have enough permission to do that.")]
-                    });
-            }
+            await member.roles.remove(role);  
 
             return await interaction.editReply( {embeds: [globalEmbed]} );
         }
 
-        try {
-            await member.roles.add(role);  
-        } catch (error) {
-            if (error.name === 'Missing Permissions' || error.code === 50013)
-                return await interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription("I don't have enough permission to do that.")]
-                });
-        }
+        await member.roles.add(role);  
 
         await interaction.editReply( {embeds: [globalEmbed]} );
     }

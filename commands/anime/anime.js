@@ -28,7 +28,7 @@ export default {
             anime = res.data.data[0];
         } catch (error) {
             await interaction.editReply({ 
-                embeds: [new EmbedBuilder.setDescription(`${error.type}: ${error.message}`)]
+                embeds: [new EmbedBuilder.setDescription(`API Error: ${error.message}`)]
             })
             return console.log(error)
         }

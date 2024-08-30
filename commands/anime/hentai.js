@@ -27,6 +27,11 @@ export default {
 
         await interaction.deferReply();
 
+        if (!interaction.channel.nsfw)
+            return await interaction.editReply({ 
+                embeds: [new EmbedBuilder().setDescription(`This is NSFW only command.`)]
+            });
+
         const tag = interaction.options.getString('tag') || 'hentai';
         
         let waifu;
@@ -37,7 +42,7 @@ export default {
         } catch (error) {
             console.log(error)
             return await interaction.editReply({ 
-                embeds: [new EmbedBuilder().setDescription(`API Error: Something went wrong.`)]
+                embeds: [new EmbedBuilder().setDescription(`API Error: ${error.message}.`)]
             });
         }
 

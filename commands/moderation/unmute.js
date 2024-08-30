@@ -66,9 +66,8 @@ export default {
 
         const role = interaction.guild.roles.cache.find(role => role.name === 'Muted');
 
-        await member.roles.remove(role)
-            .catch(error => console.log(error));
-
+        await member.roles.remove(role);
+        
         await interaction.editReply( {embeds: [globalEmbed]} );
     }
 }

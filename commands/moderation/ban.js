@@ -65,21 +65,8 @@ export default {
             .setColor('Blue')
             .addFields({ name: 'Reason:', value: reason });
 
-        try {
-            await interaction.guild.members.ban(member, { reason });
-        } catch (error) {
-
-            if (error.message === 'Missing Permissions' || error.code === 50013)
-                return await interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription("I don't have enough permission do that.")]
-                });
-            else {
-                console.log(error.message)
-                return await interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription('Something went wrong.')]
-                });
-            }
-        }
+        await interaction.guild.members.ban(member, { reason });
+       
 
         try {
             await member.send({ embeds: [privateEmbed] })

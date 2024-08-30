@@ -53,30 +53,8 @@ export default {
             .setColor('Blue')
             .addFields({ name: 'Reason:', value: reason });
 
-            
-            try {
-                await interaction.guild.members.unban(member, { reason });
-                
-            } catch (error) {
-                
-                if (error.message === 'Missing Permissions' || error.code === 50013)
-                    return await interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription("Yo bro! I don't have enough permission do that.")]
-                    });
-                
-                else if (error.message === 'Unknown Ban' || error.code === 10026)
-                    return await interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription('That user is not banned.')]
-                    }); 
-
-                else {
-                    console.log(error)
-                    return await interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription('Something went wrong.')]
-                    });
-                }
-            }
-            
+            await interaction.guild.members.unban(member, { reason });
+                            
             try {
                 await member.send({ embeds: [privateEmbed] })
             } catch (error) {
@@ -84,6 +62,7 @@ export default {
                 if (error.code === 50007) // api error code when can't send message to dms
                 console.log(`Could not send a dm to ${member.username}.`);
             }
+            
             await interaction.editReply({ embeds: [globalEmbed] })
         }
 }  

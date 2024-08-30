@@ -66,21 +66,7 @@ export default {
 
         const role = interaction.guild.roles.cache.find(role => role.name === 'Muted');
 
-        await member.roles.add(role)
-            .catch(error => {
-                console.log(error)
-
-                if (error.message === 'Missing Permissions' || error.code === 50013)
-                    return interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription("I don't have enough permission do that.")]
-                    });
-                else {
-                    console.log(error.message)
-                    return interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription('Something went wrong.')]
-                    });
-                }
-                });
+        await member.roles.add(role);
 
         await interaction.editReply( {embeds: [globalEmbed]} );
     }

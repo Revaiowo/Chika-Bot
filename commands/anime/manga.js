@@ -27,7 +27,7 @@ export default {
             const res = await axios.get(`https://api.jikan.moe/v4/manga?q=${mangaName}&limit=1`);
             manga = res.data.data[0];
         } catch (error) {
-            await interaction.editReply(`${error.type}: ${error.message}`)
+            await interaction.editReply(`$API Error: ${error.message}`)
             return console.log(error)
         }
 

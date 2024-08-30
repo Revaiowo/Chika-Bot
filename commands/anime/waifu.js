@@ -35,7 +35,7 @@ export default {
         } catch (error) {
             console.log(error)
             return await interaction.editReply({ 
-                embeds: [new EmbedBuilder().setDescription(`${error.type}: ${error.message}`)]
+                embeds: [new EmbedBuilder().setDescription(`API Error: ${error.message}`)]
             });
         }
 

@@ -65,21 +65,7 @@ export default {
             .setColor('Blue')
             .addFields({ name: 'Reason:', value: reason });
 
-        try {
-            await interaction.guild.members.kick(member, { reason });
-        } catch (error) {
-
-            if (error.message === 'Missing Permissions' || error.code === 50013)
-                return await interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription("I don't have enough permission do that.")]
-                });
-            else {
-                console.log(error.message)
-                return await interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription('Something went wrong.')]
-                });
-            }
-        }
+        await interaction.guild.members.kick(member, { reason });
 
         try {
             await member.send({ embeds: [privateEmbed] })
@@ -88,6 +74,7 @@ export default {
             if (error.code === 50007) // api error code when can't send message to dms
                 console.log(`Could not send a dm to ${member.username}.`);
         }
+        
         await interaction.editReply({ embeds: [globalEmbed] })
     }
 }  

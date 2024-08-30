@@ -43,21 +43,9 @@ export default {
             const userMessages = fetchedMessages.filter(msg => msg.author.id === member.id);
 
             return await interaction.channel.bulkDelete(userMessages, true)
-                .catch (error => {
-                    console.log(error);
-                    interaction.editReply({ 
-                        embeds: [new EmbedBuilder().setDescription('Something went wrong.')]
-                    });
-                });
         }
 
         await interaction.channel.bulkDelete(amount + 1, true)
-            .catch (error =>{
-                console.log(error.message);
-                interaction.editReply({ 
-                    embeds: [new EmbedBuilder().setDescription('Something went wrong')]
-                });
-            });
     }
 
 }
