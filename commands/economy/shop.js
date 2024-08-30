@@ -96,32 +96,32 @@ export default {
 
         if (menuConfirmation.values[0] === 'dj') {
             role.name = 'DJ';
-            role.id = '1274744575352897740';
+            role.id = '539029891283288075';
             role.price = 2000;
         }
         else if (menuConfirmation.values[0] === 'hydra') {
             role.name = 'Hydra Access';
-            role.id = '1274744636291813447';
+            role.id = '715942528477560863';
             role.price = 3000;
         }
         else if (menuConfirmation.values[0] === 'torrent') {
             role.name = 'Torrent Access';
-            role.id = '1274744687948726303';
+            role.id = '802578424887246889';
             role.price = 5000;
         }
         else if (menuConfirmation.values[0] === 'black swordsman') {
             role.name = 'The Black Swordsman';
-            role.id = '1274744763857244294';
+            role.id = '542415811554443284';
             role.price = 20_000;
         }
         else if (menuConfirmation.values[0] === 'shinomiya') {
             role.name = 'Shinomiya';
-            role.id = '1274744815870808226';
+            role.id = '696615828556349510';
             role.price = 50_000;
         }
         else if (menuConfirmation.values[0] === 'prismatic') {
             role.name = 'Prismatic';
-            role.id = '1274744864335986698';
+            role.id = '849996739607003157';
             role.price = 100_000;
         }
         
@@ -143,7 +143,6 @@ export default {
             return await interaction.editReply({ 
                 embeds: [new EmbedBuilder().setDescription("You don't have enough money in your wallet to buy this role.")]
             });
-            return await interaction.followUp();
 
         const embed = new EmbedBuilder()
             .setTitle('Confirm Transaction')
@@ -155,7 +154,7 @@ export default {
         try {
             const buttonConfimation = await buttonResponse.awaitMessageComponent({
                 filter: i => i.user.id === interaction.user.id,
-                time: 1000 * 60
+                time: 1000 * 60 * 15
             });
 
             await buttonConfimation.deferUpdate();
@@ -199,7 +198,7 @@ export default {
             await interaction.editReply({ components: [menuRow]});
 
             await interaction.followUp({ 
-                embeds: [new EmbedBuilder().setDescription('You ran out of time')]
+                embeds: [new EmbedBuilder().setDescription('You ran out of time.')]
             });
             console.log(error)
         }
