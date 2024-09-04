@@ -127,22 +127,28 @@ export default {
         
         const chosenRole = interaction.guild.roles.cache.get(role.id);
 
-        if (interaction.member.roles.cache.has(chosenRole.id))
-            return await interaction.editReply({ 
+        if (interaction.member.roles.cache.has(chosenRole.id)){
+            await interaction.editReply({ components: [] });
+            return await interaction.followUp({ 
                 embeds: [new EmbedBuilder().setDescription(`You already have ${chosenRole.name} role.`)]
             });
+        }
 
         const User = await Economy.findOne({ userId: interaction.user.id });
 
-        if (!User)
-            return await interaction.editReply({ 
+        if (!User) {
+            await interaction.editReply({ components: [] });
+            return await interaction.followUp({ 
                 embeds: [new EmbedBuilder().setDescription('You are not registered.')]
             });
+        }
 
-        if (User.wallet < role.price)
-            return await interaction.editReply({ 
+        if (User.wallet < role.price){
+            await interaction.editReply({ components: [] });
+            return await interaction.followUp({ 
                 embeds: [new EmbedBuilder().setDescription("You don't have enough money in your wallet to buy this role.")]
             });
+        }
 
         const embed = new EmbedBuilder()
             .setTitle('Confirm Transaction')
@@ -187,10 +193,12 @@ export default {
 
                 await interaction.followUp({ embeds: [embed], components: [] });
             }
-            else 
-                return await interaction.editReply({ 
+            else {
+                await interaction.editReply({ components: [] });
+                return await interaction.followUp({ 
                     embeds: [new EmbedBuilder().setDescription('Transaction caceled.')]
                 });
+            }
             
         } catch (error) {
 

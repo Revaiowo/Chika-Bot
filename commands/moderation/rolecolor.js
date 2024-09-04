@@ -32,7 +32,7 @@ export default {
 
         const hex = interaction.options.getString('hex').toUpperCase();
 
-        const assetCreaterRole = interaction.guild.roles.cache.get('1273976252906209321');
+        const assetCreaterRole = interaction.guild.roles.cache.get('707302726555533342');
 
         const senderAvatar = interaction.user.displayAvatarURL({ format: 'png', dynamic: true });
         
