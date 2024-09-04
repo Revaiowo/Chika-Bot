@@ -25,10 +25,6 @@ export default {
                     .setDescription('Buy DJ Role')
                     .setValue('dj'),
                 new StringSelectMenuOptionBuilder()
-                    .setLabel('Hydra Access Role')
-                    .setDescription('Buy Hydra Access Role')
-                    .setValue('hydra'),
-                new StringSelectMenuOptionBuilder()
                     .setLabel('Torrent Role')
                     .setDescription('Buy Torrent Role')
                     .setValue('torrent'),
@@ -44,6 +40,10 @@ export default {
                     .setLabel('Prismatic Role')
                     .setDescription('Buy Prismatic Role')
                     .setValue('prismatic'),
+                new StringSelectMenuOptionBuilder()
+                    .setLabel('Custom Role')
+                    .setDescription('Buy Custom Role')
+                    .setValue('custom'),
             )
             
         const menuRow = new ActionRowBuilder()
@@ -68,12 +68,12 @@ export default {
             .setTitle('Role Shop')
             .setColor('Yellow')
             .addFields(
-                { name: '#1 DJ Role', value: `Price: **2000**${emoji}`},
-                { name: '#2 Hydra Access Role', value: `Price: **3000**${emoji}`},
-                { name: '#3 Torrent Role', value: `Price: **5000**${emoji}`},
-                { name: '#4 Black Swordsman Role', value: `Price: **20000**${emoji}`},
-                { name: '#5 Shinomiya Role', value: `Price: **50000**${emoji}`},
-                { name: '#6 Prismatic Role', value: `Price: **100000**${emoji}`}
+                { name: '#1 DJ Role', value: `Price: **2,000**${emoji}`},
+                { name: '#2 Torrent Role', value: `Price: **5,000**${emoji}`},
+                { name: '#3 Black Swordsman Role', value: `Price: **20,000**${emoji}`},
+                { name: '#4 Shinomiya Role', value: `Price: **50,000**${emoji}`},
+                { name: '#5 Prismatic Role', value: `Price: **100,000**${emoji}`},
+                { name: '#6 Custom Role', value: `Price: **300,000**${emoji}`}
             )
             .setTimestamp()
             .setThumbnail('https://cdn.discordapp.com/attachments/1035975185561551009/1044926689437827112/white-flower-emoji-by-twitter.png')
@@ -83,7 +83,7 @@ export default {
         
         const menuConfirmation = await menuResponse.awaitMessageComponent({
             filter: i => i.user.id === interaction.user.id,
-            time: 1000 * 60
+            time: 1000 * 60 * 15
         });
 
         await menuConfirmation.deferUpdate();
@@ -98,11 +98,6 @@ export default {
             role.name = 'DJ';
             role.id = '539029891283288075';
             role.price = 2000;
-        }
-        else if (menuConfirmation.values[0] === 'hydra') {
-            role.name = 'Hydra Access';
-            role.id = '715942528477560863';
-            role.price = 3000;
         }
         else if (menuConfirmation.values[0] === 'torrent') {
             role.name = 'Torrent Access';
@@ -123,6 +118,11 @@ export default {
             role.name = 'Prismatic';
             role.id = '849996739607003157';
             role.price = 100_000;
+        }
+        else if (menuConfirmation.values[0] === 'custom') {
+            role.name = 'Custom';
+            role.id = '1280805664259702856';
+            role.price = 300_000;
         }
         
         const chosenRole = interaction.guild.roles.cache.get(role.id);
