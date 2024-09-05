@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const economySchema = mongoose.Schema({
 
     userId: {
-        type: Number,
+        type: String,
         required: true
     },
 
